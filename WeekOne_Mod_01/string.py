@@ -1,6 +1,3 @@
-from __future__ import division
-
-
 countryName = "Bangladesh";
 
 divisionName = "Dhaka";
