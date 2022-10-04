@@ -1,11 +1,15 @@
 food_amount = float(input('Enter food amount $: '))
-tip_percentage = float(input('Enter your tip percentage %: ')) / 100
+tip_percentage = float(input('Enter your tip percentage %: '))
 
-tip_amount = food_amount * tip_percentage
+def calculateFoodTotal(food: float,tip_percentage: float) -> float:
+    tip = food * (tip_percentage/100)
+    total = food+tip
+    print('--------------------------------')
+    print(f'🥘 Food Amount: ${food}')
+    print(f'⚖️ Tip Amount: ${tip}')
+    print('\n')
+    print(f'💰 Total Amount: ${total}')
+    print('--------------------------------')
+    return total
 
-total = food_amount + tip_amount
-print('----------------------------------')
-print(f'🥘 Food Amount: ${food_amount}')
-print(f'⚖️ Tip Amount: ${tip_amount}')
-print(f'💰 Total Amount: ${total}')
-print('----------------------------------')
+calculateFoodTotal(food_amount,tip_percentage)
