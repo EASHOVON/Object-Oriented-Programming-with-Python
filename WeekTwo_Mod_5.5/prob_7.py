@@ -7,13 +7,21 @@ sample_dict = {'a': 300, 'b': 200, 'c': 300}
 Expected Output:
 present """
 
-sample_dict = {'a': 100,'b': 200,'c':300}
+# Manual
+""" sample_dict = {'a': 100,'b': 200,'c':300}
 chk = False
 for k,v in sample_dict.items():
     if(v==100):
         chk = True
         break
 if chk:
+    print('Present',end='')
+else:
+    print('Not Present',end='') """
+
+
+sample_dict = {'a': 400, 'b': 200, 'c': 300}
+if 100 in sample_dict.values():
     print('Present',end='')
 else:
     print('Not Present',end='')
