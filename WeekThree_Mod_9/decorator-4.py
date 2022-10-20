@@ -24,3 +24,12 @@ def plus_one(number):
 
 add_one = plus_one
 add_one(5)
+
+
+""" Defining Functions Inside other Functions """
+def plus_one(number):
+    def add_one(number):
+        return number + 1
+    result = add_one(number)
+    return result
+plus_one(4)
