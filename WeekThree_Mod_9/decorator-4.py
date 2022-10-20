@@ -54,3 +54,15 @@ def hello_function():
 hello = hello_function()
 hello()
 
+
+""" Nested Functions have access to the Enclosing Function's Variable Scope """
+def print_message(message):
+    "Enclosong Function"
+    def message_sender():
+        "Nested Function"
+        print(message)
+
+    message_sender()
+
+print_message("Some random message")
+
