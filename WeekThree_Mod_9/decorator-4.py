@@ -64,7 +64,7 @@ def print_message(message):
 
     message_sender()
 
-print_message("Some random message")
+# print_message("Some random message")
 
 
 
@@ -76,9 +76,12 @@ def uppercase_decorator(function):
         return make_uppercase
 
     return wrapper
-    
+@uppercase_decorator
 def say_hi():
     return 'hello there'
 
-decorate = uppercase_decorator(say_hi)
+print(say_hi())
+
+""" decorate = uppercase_decorator(say_hi)
 decorate()
+ """
