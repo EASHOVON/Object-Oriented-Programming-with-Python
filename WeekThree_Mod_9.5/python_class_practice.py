@@ -20,6 +20,10 @@ class Vehicle:
     def set_vehicle_name(self,name):
         self.name = name
 
+    # __str__ methods
+    def __str__(self):
+        return 'Vehicles Name '+str(self.name)+' Milage '+str(self.mileage)
+
 class Bus(Vehicle):
     pass
 
@@ -41,4 +45,7 @@ premo_car = Vehicle("Premeo",20,60)
 premo_car.set_vehicle_name = "Lambergeni"
 
 vehicleName = premo_car.get_vehicle_name
-print(vehicleName)
+# print(vehicleName)
+
+
+print(premo_car)
