@@ -6,7 +6,6 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QPixmap , QImage, QIcon
 from PyQt5.QtCore import QTimer
 import cv2
-import datetime
 
 class Window(QWidget):
     """ Main app window """
@@ -38,10 +37,6 @@ class Window(QWidget):
 
     def ui(self):
         """ Contains All Ui Things """
-        # layout
-        grid = QGridLayout()
-        self.setLayout(grid)
-
 
         # Image level
         self.image_level = QLabel(self)
@@ -50,19 +45,11 @@ class Window(QWidget):
         # Capture Button
         self.capture_btn = QPushButton(self)
         self.capture_btn.setIcon(self.camera_icon)
-        self.capture_btn.setStyleSheet("border-radius: 25; border : 2px solid black; border-width: 3px")
-        self.capture_btn.setFixedSize(50,50)
-        self.capture_btn.clicked.connect(self.save_img)
+
 
         if not self.timer.isActive():
             self.cap = cv2.VideoCapture(0)
             self.timer.start(20)
-
-        # Add Things to the layout
-        grid.addWidget(self.capture_btn,0,0)
-        grid.addWidget(self.image_level,0,1)
-
-        
         self.show()
 
     def update(self):
@@ -78,14 +65,10 @@ class Window(QWidget):
 
     def save_img(self):
         """ Save image from camera """
-        cv2.imwrite(f"{self.dt}.jpg",self.frame)
+        pass
 
     def record(self):
         """ Record video """
-
-    def get_time(self):
-        now = datetime.datetime.now()
-        self.dt = now.strftime("%m-%d-%y,%H-%M-%S")
 
 
 
