@@ -39,3 +39,4 @@ a = Employee('Rahul', 886012, 200000, "Intern")
 # its instance
 a.display()
 a.details()
+
