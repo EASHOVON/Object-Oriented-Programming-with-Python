@@ -1,4 +1,5 @@
 import hashlib
+import random
 from brta import BRTA
 from vehicles import Car,Bike,Cng
 from ride_manager import uber
@@ -89,9 +90,7 @@ hero = User("Hero Alom","hero@alom.com","heroOhHero")
 User.log_in('hero@alom.com','heroOhHero')
 
 
-kuber = Driver("Kuber Majhi", "kuber@majhi.com","kopilajaishna", 54, 45)
-result = license_authority.validate_license(kuber.email,kuber.license)
-print(result)
-kuber.take_driving_test()
-result = license_authority.validate_license(kuber.email,kuber.license)
-print(result)
+rider1 = Rider('rider1','rider1@gmail.com','rider1',random.randint(0,100),5000)
+print(dir(rider1))
+rider2 = Rider('rider2','rider2@gmail.com','rider2',random.randint(0,100),5000)
+print(dir(rider2))
