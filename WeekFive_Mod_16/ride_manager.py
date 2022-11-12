@@ -24,8 +24,13 @@ class RideManager:
             for car in self.__available_cars:
                 print('potential',rider.location,car.driver.location)
                 if abs(rider.location - car.driver.location) < 10:
-                    print("Find a match for you!" )
-                    return True
+                    if car.status == 'available':
+                        car.status = 'unavailable'
+                        print('available cars:',len(self.__available_cars))
+                        self.__available_cars.remove(car)
+                        print('available cars:',len(self.__available_cars))
+                        print("Find a match for you!" )
+                        return True
 
 
 
