@@ -4,15 +4,28 @@ from brta import BRTA
 from vehicles import Car,Bike,Cng
 from ride_manager import uber
 
+class UserAlreadyExists(Exception):
+    def __init__(self, email, *args: object) -> None:
+        print(f'User: {email} already exists.')
+        super().__init__(*args)
+
+
+
 license_authority = BRTA()
 class User:
     def __init__(self,name,email,password) -> None:
         self.name = name
         self.email = email
         pwd_encrypted = hashlib.md5(password.encode()).hexdigest()
-        with open('users.txt','w') as file:
-            file.write(f'{email} {pwd_encrypted}')
-        file.close()
+        already_exists = False
+        with open('users.txt','r') as file:
+            if email in file.read():
+                # raise UserAlreadyExists(email)
+                already_exists = True
+        if already_exists != True:
+            with open('users.txt','a') as file:
+                file.write(f'{email} {pwd_encrypted}\n')
+            file.close()
         print(self.name, "user created")
 
     @staticmethod
