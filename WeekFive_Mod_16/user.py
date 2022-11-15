@@ -38,6 +38,49 @@ class User:
             return False
 
 
+# As a Rider, He/She also a User
+# Making Rider Class that will be inherit User class
+class Rider(User):
+    def __init__(self, name, email, password,location,balance) -> None:
+        super().__init__(name, email, password)
+        self.location = location
+        self.balance = balance
+
+    # kon location a Rider ase ta kortipokkho jante pare ejonno set_location Method
+    def set_location(self,location):
+        self.location = location
+
+
+    # To know Rider location
+    def get_location(self):
+        return self.location
+
+    # A Rider can Request a trip in this method
+    def request_trip(self,destination):
+        pass
+
+    # To Start a trip
+    def start_a_trip(self,fare):
+        self.balance -= fare
+
+
+
+# Making a Driver Class That also inherit User class
+class Driver(User):
+    def __init__(self, name, email, password,location,licence) -> None:
+        super().__init__(name, email, password)
+        self.location = location
+        self.licence = licence
+
+
+    # Driver can start a trip
+    def start_a_trip(self,destination,fare):
+        self.earning += fare
+
+
+
+
+
 # User
 hero = User("Hero Alom","hero@alom.com","heroOhHero")
 
