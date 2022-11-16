@@ -1,4 +1,10 @@
 import hashlib
+from Brta import Brta
+
+
+# Making Instance variable of Brta Class
+licence_authority = Brta()
+
 
 # Making User from Module 16-2
 class User:
@@ -71,13 +77,23 @@ class Driver(User):
         super().__init__(name, email, password)
         self.location = location
         self.licence = licence
+        self.valid_driver = licence_authority.validate_licence(email,licence)
+        self.earning = 0
+
+    # Take Driving Test to Driver
+    def driving_test(self):
+        result = licence_authority.take_driving_test(self.userEmail)
+        if result==False:
+            print("Sorry you failed, Try Again!")
+        else:
+            self.licence = result
+            self.valid_driver = True
 
 
     # Driver can start a trip
     def start_a_trip(self,destination,fare):
         self.earning += fare
-
-
+        self.location = destination
 
 
 
@@ -86,3 +102,16 @@ hero = User("Hero Alom","hero@alom.com","heroOhHero")
 
 # When a user try to log in:
 User.log_in("hero@alom.com","heroOhHero")
+
+# Creating Driver
+kuber =  Driver("Kuber Majhi","kuber@majhi.com","kopilaJaishna",54,16544341341)
+
+# Test Driver
+result = licence_authority.validate_licence(kuber.userEmail,kuber.licence)
+print(result)
+
+# Driving Test
+kuber.driving_test()
+
+result = licence_authority.validate_licence(kuber.userEmail,kuber.licence)
+print(result)
