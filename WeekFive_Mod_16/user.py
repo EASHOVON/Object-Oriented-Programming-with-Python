@@ -2,6 +2,7 @@ import hashlib
 from Brta import Brta
 from vehicle import Car,Bike,Cng
 from ride_manager import uber
+import random
 
 # Making Instance variable of Brta Class
 licence_authority = Brta()
@@ -97,13 +98,13 @@ class Driver(User):
             new_vehicle = None
             if vehicle_type == 'car':
                 new_vehicle = Car(vehicle_type,licence_plate,rate,self.userEmail)
-                uber.add_a_vehicle(new_vehicle)
+                uber.add_a_vehicle(vehicle_type,new_vehicle)
             elif vehicle_type == 'bike':
                 new_vehicle = Bike(vehicle_type,licence_plate,rate,self.userEmail)
-                uber.add_a_vehicle(new_vehicle)
+                uber.add_a_vehicle(vehicle_type,new_vehicle)
             else:
                 new_vehicle = Cng(vehicle_type,licence_plate,rate,self.userEmail)
-                uber.add_a_vehicle(new_vehicle)
+                uber.add_a_vehicle(vehicle_type,new_vehicle)
         else:
             print("You are not a valid driver")
 
@@ -115,21 +116,23 @@ class Driver(User):
 
 
 
-# User
-hero = User("Hero Alom","hero@alom.com","heroOhHero")
+# Making Riders
+rider1 = Rider('rider1','rider1@gmail.com','rider1',random.randint(0,100),5000)
+rider2 = Rider('rider2','rider2@gmail.com','rider2',random.randint(0,100),5000)
+rider3 = Rider('rider3','rider3@gmail.com','rider3',random.randint(0,100),5000)
 
-# When a user try to log in:
-User.log_in("hero@alom.com","heroOhHero")
+# Making Drivers
+driver1 = Driver('driver1','driver1@gmail.com','driver1',random.randint(0,100),5441631)
+driver1.driving_test()
+driver1.register_a_vehicle('car',1245,10)
+driver2 = Driver('driver2','driver2@gmail.com','driver2',random.randint(0,100),5485631)
+driver2.driving_test()
+driver2.register_a_vehicle('car',5445,10)
+driver3 = Driver('driver3','driver3@gmail.com','driver3',random.randint(0,100),5442541)
+driver3.driving_test()
+driver3.register_a_vehicle('car',3545,10)
+driver4 = Driver('driver4','driver4@gmail.com','driver4',random.randint(0,100),2541631)
+driver4.driving_test()
+driver4.register_a_vehicle('car',5845,10)
 
-# Creating Driver
-kuber =  Driver("Kuber Majhi","kuber@majhi.com","kopilaJaishna",54,16544341341)
-
-# Test Driver
-result = licence_authority.validate_licence(kuber.userEmail,kuber.licence)
-print(result)
-
-# Driving Test
-kuber.driving_test()
-
-result = licence_authority.validate_licence(kuber.userEmail,kuber.licence)
-print(result)
+print(uber.get_available_cars())

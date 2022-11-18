@@ -13,7 +13,10 @@ class RideManager:
         else:
             self.__availableCngs.append(vehicle)
 
-    def match_a_vehicle(self):
+    def get_available_cars(self):
+        return self.__availableCars
+    
+    def find_a_vehicle(self):
         pass
 
 
