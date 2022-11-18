@@ -1,6 +1,7 @@
 import hashlib
 from Brta import Brta
-
+from vehicle import Car,Bike,Cng
+from ride_manager import uber
 
 # Making Instance variable of Brta Class
 licence_authority = Brta()
@@ -88,6 +89,23 @@ class Driver(User):
         else:
             self.licence = result
             self.valid_driver = True
+
+
+    # For Register a vehicle
+    def register_a_vehicle(self,vehicle_type,licence_plate,rate):
+        if self.valid_driver is True:
+            new_vehicle = None
+            if vehicle_type == 'car':
+                new_vehicle = Car(vehicle_type,licence_plate,rate,self.userEmail)
+                uber.add_a_vehicle(new_vehicle)
+            elif vehicle_type == 'bike':
+                new_vehicle = Bike(vehicle_type,licence_plate,rate,self.userEmail)
+                uber.add_a_vehicle(new_vehicle)
+            else:
+                new_vehicle = Cng(vehicle_type,licence_plate,rate,self.userEmail)
+                uber.add_a_vehicle(new_vehicle)
+        else:
+            print("You are not a valid driver")
 
 
     # Driver can start a trip
