@@ -123,7 +123,8 @@ class Driver(User):
                 new_vehicle = Cng(vehicle_type,licence_plate,rate,self)
                 uber.add_a_vehicle(vehicle_type,new_vehicle)
         else:
-            print("You are not a valid driver")
+            pass
+            # print("You are not a valid driver")
 
 
     # Driver can start a trip
@@ -134,7 +135,7 @@ class Driver(User):
 
 
 # Making Riders
-rider1 = Rider('rider1','rider1@gmail.com','rider1',random.randint(0,30),5000)
+rider1 = Rider('rider1','rider1@gmail.com','rider1',random.randint(0,30),1000)
 rider2 = Rider('rider2','rider2@gmail.com','rider2',random.randint(0,30),5000)
 rider3 = Rider('rider3','rider3@gmail.com','rider3',random.randint(0,30),5000)
 
@@ -146,4 +147,8 @@ for i in range(1,100):
 
 
 print(uber.get_available_cars())
-uber.find_a_vehicle(rider1,'car',90)
+uber.find_a_vehicle(rider1,'car',random.randint(1,100))
+uber.find_a_vehicle(rider1,'car',random.randint(1,100))
+uber.find_a_vehicle(rider1,'car',random.randint(1,100))
+uber.find_a_vehicle(rider1,'car',random.randint(1,100))
+uber.find_a_vehicle(rider1,'car',random.randint(1,100))
