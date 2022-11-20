@@ -1,8 +1,15 @@
 import hashlib
 from Brta import Brta
-from vehicle import Car,Bike,Cng
+from vehicles import Car,Bike,Cng
 from ride_manager import uber
 import random
+
+# Custom Exception
+class UserAlreadyExist(Exception):
+    def __init__(self,email, *args: object) -> None:
+        super().__init__(*args)
+        print(f'User {email} already exist!')
+
 
 # Making Instance variable of Brta Class
 licence_authority = Brta()
@@ -17,13 +24,22 @@ class User:
         # Encrypting Password
         pwd_encrypted = hashlib.md5(password.encode()).hexdigest()
         
-        # Storing Password
-        with open('WeekFive_Mod_16/new.txt','w') as file:
-            file.write(f'{email} {pwd_encrypted}')
+        # Checking If a user already exist
+        already_exist = False
+        with open('WeekFive_Mod_17/new.txt','r') as file:
+            if email in file.read():
+                # raise UserAlreadyExist(email)
+                already_exist = True
         file.close()
 
+        # Storing Password
+        if already_exist==False:
+            with open('WeekFive_Mod_17/new.txt','a') as file:
+                file.write(f'{email} {pwd_encrypted}\n')
+            file.close()
+
         # User Created Message
-        print(f'"{self.userName}" user created.')
+        # print(f'"{self.userName}" user created.')
 
     # Static Method
     @staticmethod
@@ -86,7 +102,8 @@ class Driver(User):
     def driving_test(self):
         result = licence_authority.take_driving_test(self.userEmail)
         if result==False:
-            print("Sorry you failed, Try Again!")
+            # print("Sorry you failed, Try Again!")
+            self.licence = None
         else:
             self.licence = result
             self.valid_driver = True
@@ -122,18 +139,11 @@ rider2 = Rider('rider2','rider2@gmail.com','rider2',random.randint(0,30),5000)
 rider3 = Rider('rider3','rider3@gmail.com','rider3',random.randint(0,30),5000)
 
 # Making Drivers
-driver1 = Driver('driver1','driver1@gmail.com','driver1',random.randint(0,30),5441631)
-driver1.driving_test()
-driver1.register_a_vehicle('car',1245,10)
-driver2 = Driver('driver2','driver2@gmail.com','driver2',random.randint(0,30),5485631)
-driver2.driving_test()
-driver2.register_a_vehicle('car',5445,10)
-driver3 = Driver('driver3','driver3@gmail.com','driver3',random.randint(0,30),5442541)
-driver3.driving_test()
-driver3.register_a_vehicle('car',3545,10)
-driver4 = Driver('driver4','driver4@gmail.com','driver4',random.randint(0,30),2541631)
-driver4.driving_test()
-driver4.register_a_vehicle('car',5845,10)
+for i in range(1,100):
+    globals()[f'driver{i}'] = Driver(f'driver{i}',f'driver{i}@gmail.com',f'driver{i}',random.randint(0,100),5441631)
+    globals()[f'driver{i}'].driving_test()
+    globals()[f'driver{i}'].register_a_vehicle('car',1245,10)
+
 
 print(uber.get_available_cars())
 uber.find_a_vehicle(rider1,'car',90)
