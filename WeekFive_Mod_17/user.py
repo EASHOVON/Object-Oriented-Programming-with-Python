@@ -69,6 +69,7 @@ class Rider(User):
         super().__init__(name, email, password)
         self.location = location
         self.balance = balance
+        self.__trip_history = []
 
     # kon location a Rider ase ta kortipokkho jante pare ejonno set_location Method
     def set_location(self,location):
@@ -83,10 +84,14 @@ class Rider(User):
     def request_trip(self,destination):
         pass
 
-    # To Start a trip
-    def start_a_trip(self,fare):
-        self.balance -= fare
+    # Get Trip History
+    def get_trip_history(self):
+        return self.__trip_history
 
+    # To Start a trip
+    def start_a_trip(self,fare,trip_info):
+        self.balance -= fare
+        self.__trip_history.append(trip_info)
 
 
 # Making a Driver Class That also inherit User class
@@ -94,6 +99,7 @@ class Driver(User):
     def __init__(self, name, email, password,location,licence) -> None:
         super().__init__(name, email, password)
         self.location = location
+        self.__trip_history = []
         self.licence = licence
         self.valid_driver = licence_authority.validate_licence(email,licence)
         self.earning = 0
@@ -128,9 +134,10 @@ class Driver(User):
 
 
     # Driver can start a trip
-    def start_a_trip(self,destination,fare):
+    def start_a_trip(self,destination,fare,trip_info):
         self.earning += fare
         self.location = destination
+        self.__trip_history.append(trip_info)
 
 
 
@@ -152,3 +159,5 @@ uber.find_a_vehicle(rider1,'car',random.randint(1,100))
 uber.find_a_vehicle(rider1,'car',random.randint(1,100))
 uber.find_a_vehicle(rider1,'car',random.randint(1,100))
 uber.find_a_vehicle(rider1,'car',random.randint(1,100))
+
+print(rider1.get_trip_history())
