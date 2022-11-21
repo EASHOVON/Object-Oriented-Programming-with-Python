@@ -90,6 +90,7 @@ class Rider(User):
 
     # To Start a trip
     def start_a_trip(self,fare,trip_info):
+        print(f'A trip started for {self.userName}')
         self.balance -= fare
         self.__trip_history.append(trip_info)
 
@@ -157,10 +158,10 @@ for i in range(1,100):
 
 print(uber.get_available_cars())
 uber.find_a_vehicle(rider1,'car',random.randint(1,100))
-uber.find_a_vehicle(rider1,'car',random.randint(1,100))
-uber.find_a_vehicle(rider1,'car',random.randint(1,100))
-uber.find_a_vehicle(rider1,'car',random.randint(1,100))
-uber.find_a_vehicle(rider1,'car',random.randint(1,100))
+uber.find_a_vehicle(rider2,'car',random.randint(1,100))
+uber.find_a_vehicle(rider3,'car',random.randint(1,100))
+# uber.find_a_vehicle(rider1,'car',random.randint(1,100))
+# uber.find_a_vehicle(rider1,'car',random.randint(1,100))
 
 print(rider1.get_trip_history())
 print(uber.total_income())
