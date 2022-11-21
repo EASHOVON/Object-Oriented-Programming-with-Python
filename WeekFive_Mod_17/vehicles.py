@@ -1,5 +1,5 @@
 from abc import ABC,abstractmethod
-
+from time import sleep
 # Creating a Vehicle class
 class Vehicle(ABC):
     speed = {
@@ -32,9 +32,14 @@ class Car(Vehicle):
     def __init__(self, vehicle_type, licence_plate, rate, driver) -> None:
         super().__init__(vehicle_type, licence_plate, rate, driver)
         
-    def start_driving(self):
+    def start_driving(self,start,destination):
         self.status = 'unavailable'
         print(self.vehicle_type,self.licence_plate,"Started")
+        distance = abs(start-destination)
+        for i in range(0,distance):
+            sleep(0.5)
+            print(f'Driving: {self.licence_plate} current position: {i} of {distance}')
+        self.trip_finished()
 
     def trip_finished(self):
         self.status = 'available'
