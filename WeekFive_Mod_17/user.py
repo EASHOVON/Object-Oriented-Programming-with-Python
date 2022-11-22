@@ -3,6 +3,7 @@ from Brta import Brta
 from vehicles import Car,Bike,Cng
 from ride_manager import uber
 import random
+import threading
 
 # Custom Exception
 class UserAlreadyExist(Exception):
@@ -139,7 +140,10 @@ class Driver(User):
     def start_a_trip(self,start,destination,fare,trip_info):
         self.earning += fare
         self.location = destination
-        self.vehicle.start_driving(start,destination)
+        # Start a Thread
+        trip_thread = threading.Thread(target=self.vehicle.start_driving,args=(start,destination))
+        trip_thread.start()
+        # self.vehicle.start_driving(start,destination)
         self.__trip_history.append(trip_info)
 
 
@@ -148,20 +152,22 @@ class Driver(User):
 rider1 = Rider('rider1','rider1@gmail.com','rider1',random.randint(0,30),1000)
 rider2 = Rider('rider2','rider2@gmail.com','rider2',random.randint(0,30),5000)
 rider3 = Rider('rider3','rider3@gmail.com','rider3',random.randint(0,30),5000)
+rider4 = Rider('rider4','rider4@gmail.com','rider4',random.randint(0,30),5000)
+rider5 = Rider('rider5','rider5@gmail.com','rider5',random.randint(0,30),5000)
 
 # Making Drivers
 for i in range(1,100):
     globals()[f'driver{i}'] = Driver(f'driver{i}',f'driver{i}@gmail.com',f'driver{i}',random.randint(0,100),5441631)
     globals()[f'driver{i}'].driving_test()
-    globals()[f'driver{i}'].register_a_vehicle('car',1245,10)
+    globals()[f'driver{i}'].register_a_vehicle('bike',1245,10)
 
 
 print(uber.get_available_cars())
-uber.find_a_vehicle(rider1,'car',random.randint(1,100))
-uber.find_a_vehicle(rider2,'car',random.randint(1,100))
-uber.find_a_vehicle(rider3,'car',random.randint(1,100))
-# uber.find_a_vehicle(rider1,'car',random.randint(1,100))
-# uber.find_a_vehicle(rider1,'car',random.randint(1,100))
+uber.find_a_vehicle(rider1,'bike',random.randint(1,100))
+# uber.find_a_vehicle(rider2,'car',random.randint(1,100))
+# uber.find_a_vehicle(rider3,'car',random.randint(1,100))
+# uber.find_a_vehicle(rider4,'car',random.randint(1,100))
+# uber.find_a_vehicle(rider5,'car',random.randint(1,100))
 
 print(rider1.get_trip_history())
 print(uber.total_income())

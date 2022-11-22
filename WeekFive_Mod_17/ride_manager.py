@@ -25,7 +25,6 @@ class RideManager:
         return self.__trip_history
     
     def find_a_vehicle(self,rider,vehicle_type,destination):
-        print("Looking for a car")
         if vehicle_type == 'car':
             if len(self.__availableCars)==0:
                 print("Sorry No Car Available!")
