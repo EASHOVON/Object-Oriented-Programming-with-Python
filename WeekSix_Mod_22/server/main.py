@@ -34,7 +34,6 @@ import glob, shutil, os, time
 destination_path = "../destination"
 source_path = "../source/*"
 server_path = "./*"
-
 postfix = [1,2,3]
 
 while True:
